@@ -10,6 +10,14 @@
         android:id="@+id/webViewSuite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:url="@string/url"/>
+        app:url="@string/url"
+        app:webViewProgressBarStyle="linear"
+        app:inflationDelay="100"
+        app:enableJavaScript="false"
+        app:overrideTelLink="true"
+        app:overrideEmailLink="true"
+        app:showZoomControl="false"
+        app:enableVerticalScrollBar="false"
+        app:enableHorizontalScrollBar="false"/>
 
 </FrameLayout>

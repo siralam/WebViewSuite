@@ -15,7 +15,5 @@ public class WebViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web_view);
 
         webViewSuite = findViewById(R.id.webViewSuite);
-
-        webViewSuite.startLoading("http://www.cuhk.edu.hk/chinese/contact.html");
     }
 }
