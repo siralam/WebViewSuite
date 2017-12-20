@@ -23,14 +23,17 @@ import android.widget.ProgressBar;
  * A combination of WebView and Progressbar.
  * The main aim of this library is to delay the inflation of WebView,
  * So that it does not slow down Activity creation, which happens since Android 5.0.
+ * You can have a look at this StackOverflow post:
+ * https://stackoverflow.com/questions/46928113/inflating-webview-is-slow-since-lollipop/
  */
 
 public class WebViewSuite extends FrameLayout {
 
     private Context context;
 
-    public static final int PROGRESS_BAR_STYLE_LINEAR = 0;
-    public static final int PROGRESS_BAR_STYLE_CIRCULAR = 1;
+    public static final int PROGRESS_BAR_STYLE_NONE = 0;
+    public static final int PROGRESS_BAR_STYLE_LINEAR = 1;
+    public static final int PROGRESS_BAR_STYLE_CIRCULAR = 2;
 
     //attributes
     private int progressBarStyle = PROGRESS_BAR_STYLE_LINEAR;
@@ -48,6 +51,7 @@ public class WebViewSuite extends FrameLayout {
     private WebView webView;
     private ProgressBar linearProgressBar;
     private ProgressBar circularProgressBar;
+    private ProgressBar customProgressBar;
 
     private boolean webViewInflated = false;
 
@@ -95,6 +99,11 @@ public class WebViewSuite extends FrameLayout {
             case PROGRESS_BAR_STYLE_CIRCULAR:
                 linearProgressBar.setVisibility(GONE);
                 circularProgressBar.setVisibility(VISIBLE);
+                break;
+            case PROGRESS_BAR_STYLE_NONE:
+                linearProgressBar.setVisibility(GONE);
+                circularProgressBar.setVisibility(GONE);
+                break;
             case PROGRESS_BAR_STYLE_LINEAR:
             default:
                 circularProgressBar.setVisibility(GONE);
@@ -131,11 +140,43 @@ public class WebViewSuite extends FrameLayout {
         webView.loadUrl(url);
     }
 
+    /**
+     * A convenient method for you to override your onBackPressed.
+     * return false if there is no more page to goBack / webView is not yet inflated.
+     */
+    public boolean goBackIfPossible () {
+        if (webView != null && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * A convenient method for you to refresh.
+     */
+    public void refresh () {
+        if (webView != null) webView.reload();
+    }
+
+    /**
+     * If you don't like default progressbar, you can simply submit your own through this method.
+     * It will automatically disappear and reappear according to page load.
+     */
+    public void setCustomProgressBar (ProgressBar progressBar) {
+        this.customProgressBar = progressBar;
+    }
+
     private void toggleProgressbar (boolean isVisible) {
         int status = isVisible ? View.VISIBLE : View.GONE;
         switch (progressBarStyle) {
             case PROGRESS_BAR_STYLE_CIRCULAR:
                 circularProgressBar.setVisibility(status);
+                break;
+            case PROGRESS_BAR_STYLE_NONE:
+                if (customProgressBar != null) customProgressBar.setVisibility(status);
+                break;
             case PROGRESS_BAR_STYLE_LINEAR:
             default:
                 linearProgressBar.setVisibility(status);

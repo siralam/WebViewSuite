@@ -3,8 +3,9 @@
 
     <declare-styleable name="WebViewSuite">
         <attr name="webViewProgressBarStyle" format="enum">
-            <enum name="linear" value="0"/>
-            <enum name="circular" value="1"/>
+            <enum name="linear" value="1"/>
+            <enum name="circular" value="2"/>
+            <enum name="none" value="0" />
         </attr>
         <attr name="inflationDelay" format="integer"/>
         <attr name="enableJavaScript" format="boolean"/>
