@@ -119,6 +119,12 @@ public class WebViewSuite extends FrameLayout {
         if (url != null && !url.isEmpty()) webView.loadUrl(url);
     }
 
+    /**
+     * Submit your URL programmatically.
+     * This will of course override the URL you set in XML (if any).
+     * You can do this in onCreate() of your activity, because even if webView is null,
+     * loading will be triggered again after webView is inflated.
+     */
     public void startLoading (String url) {
         this.url = url;
         if (!webViewInflated || webView == null) return;
@@ -136,10 +142,26 @@ public class WebViewSuite extends FrameLayout {
         }
     }
 
+    /**
+     * If you want to customize the behavior of the webViewClient,
+     * e.g. Override urls other than default telephone and email,
+     * Use this method on WebViewSuite to submit the callbacks.
+     * These callbacks will be executed after the codes in WebViewSuite are done.
+     */
     public void customizeClient (WebViewSuiteCallback callback) {
         this.callback = callback;
     }
 
+    /**
+     * If you want to customize the settings of the webViewClient,
+     * You cannot do it directly in onCreate() of your activity by getting WebView from WebViewSuite.
+     * Why? Because the main point of this library is to delay the inflation - WebView is null in onCreate()!
+     *
+     * Therefore, I provided a callback for you to submit your own settings.
+     * Use this method on WebViewSuite (This time in onCreate()) and submit the callback.
+     * This callback will be executed after the default settings in WebViewSuite are completed.
+     * I can assure you that webView is not null during interfereWebViewSetup().
+     */
     public void interfereWebViewSetup (WebViewSetupInterference interference) {
         this.interference = interference;
     }
