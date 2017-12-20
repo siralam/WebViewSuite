@@ -2,7 +2,7 @@
 
 A WebView that:
 
-1. Does not delay Activity creation (See [this post](https://stackoverflow.com/questions/46928113/inflating-webview-is-slow-since-lollipop/))
+1. **Does not delay Activity creation** (See [this post](https://stackoverflow.com/questions/46928113/inflating-webview-is-slow-since-lollipop/))
 2. Built-in ProgressBars (You can also override using your own ProgressBar)
 3. Configure WebView client through XML
 4. Largely reduce your code needed in creating a simple WebView
@@ -11,7 +11,22 @@ A WebView that:
 
 ### Step 1: Add to Project
 
-TODO: Gradle
+First make sure `jcenter()` is included as a repository in your **project**'s build.gradle:  
+
+```
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+```
+
+And then add the below to your app's build.gradle:  
+
+```
+    implementation 'com.asksira.android:webviewsuite:1.0.0'
+```
 
 ### Step 2: Add WebViewSuite to XML
 
@@ -124,9 +139,18 @@ Instead, use the below callback:
 ```
 Copyright 2017 Sira Lam
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the WebViewSuite), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
+associated documentation files (the WebViewSuite), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or 
+substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE
+AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
