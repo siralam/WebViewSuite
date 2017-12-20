@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WebViewSuite</string>
+
+    <string name="url">https://www.google.com.hk/</string>
+</resources>
