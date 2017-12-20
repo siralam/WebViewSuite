@@ -28,3 +28,31 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
 }
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'WebViewSuite'
+
+    publishedGroupId = 'com.asksira.android'
+    libraryName = 'WebViewSuite'
+    artifact = 'webviewsuite'
+
+    libraryDescription = 'A WebView that does not delay Activity creation, has built-in Progressbar and configurable through XML.'
+
+    siteUrl = 'https://github.com/siralam/WebViewSuite'
+    gitUrl = 'https://github.com/siralam/WebViewSuite.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'siralam'
+    developerName = 'Sira Lam'
+    developerEmail = 'sira.swlam@gmail.com'
+
+    licenseName = 'MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT License"]
+}
+
+// Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
