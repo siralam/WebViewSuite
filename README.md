@@ -134,6 +134,16 @@ Instead, use the below callback:
     }
 ```
 
+## How does it work?
+
+Since Android 5.0, the first time inflation of a WebView is very slow.  
+If you do not delay its inflation, It will freeze the user when user is trying to open an Activity that has a WebView. See [this post](https://stackoverflow.com/questions/46928113/inflating-webview-is-slow-since-lollipop) for more information.
+
+By using [`ViewStub`](https://developer.android.com/reference/android/view/ViewStub.html) with `Handler.postDelayed()`, the WebView is inflated after the Activity is completely created and **visible to user**. So when the WebView is inflating, what user sees is a created Activity with running progressbar. It perfectly **looks like the time needed for the inflation of WebView is just the time needed to load that webpage**.
+
+This trick greatly improved user experience.  
+Actually, such trick is not only applicable to WebView, but applicable to all View elements that delays Activity creation due to slow inflation.
+
 ## License
 
 ```
