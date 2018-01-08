@@ -46,6 +46,11 @@ public class WebViewSuite extends FrameLayout {
     private boolean enableHorizontalScrollBar = false;
     private String url;
 
+    //For loading static data
+    private String htmlData;
+    private String mimeType;
+    private String encoding;
+
     //View elements
     private ViewStub webViewStub;
     private WebView webView;
@@ -125,7 +130,11 @@ public class WebViewSuite extends FrameLayout {
     private void postWebViewInflated () {
         if (!webViewInflated || webView == null) return;
         setupWebView();
-        if (url != null && !url.isEmpty()) webView.loadUrl(url);
+        if (url != null && !url.isEmpty()) {
+            webView.loadUrl(url);
+        } else if (htmlData != null && !htmlData.isEmpty()) {
+            webView.loadData(htmlData, mimeType, encoding);
+        }
     }
 
     /**
@@ -138,6 +147,14 @@ public class WebViewSuite extends FrameLayout {
         this.url = url;
         if (!webViewInflated || webView == null) return;
         webView.loadUrl(url);
+    }
+
+    public void startLoadData (String data, String mimeType, String encoding) {
+        this.htmlData = data;
+        this.mimeType = mimeType;
+        this.encoding = encoding;
+        if (!webViewInflated || webView == null) return;
+        webView.loadData(htmlData, mimeType, encoding);
     }
 
     /**
