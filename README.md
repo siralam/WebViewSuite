@@ -25,7 +25,7 @@ allprojects {
 And then add the below to your app's build.gradle:  
 
 ```
-    implementation 'com.asksira.android:webviewsuite:1.0.0'
+    implementation 'com.asksira.android:webviewsuite:1.0.1'
 ```
 
 ### Step 2: Add WebViewSuite to XML
@@ -134,6 +134,15 @@ Instead, use the below callback:
     }
 ```
 
+### Loading static HTML data
+
+Instead of `startLoading()`, use `startLoadData()` instead:
+
+```java
+webViewSuite.startLoadData(data, mimeType, encoding);
+```
+
+
 ## How does it work?
 
 Since Android 5.0, the first time inflation of a WebView is very slow.  
@@ -143,6 +152,11 @@ By using [`ViewStub`](https://developer.android.com/reference/android/view/ViewS
 
 This trick greatly improved user experience.  
 Actually, such trick is not only applicable to WebView, but applicable to all View elements that delays Activity creation due to slow inflation.
+
+## Release Notes
+
+v1.0.1  
+- Added support for static HTML data loading
 
 ## License
 
