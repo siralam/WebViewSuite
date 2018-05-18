@@ -25,7 +25,7 @@ allprojects {
 And then add the below to your app's build.gradle:  
 
 ```
-    implementation 'com.asksira.android:webviewsuite:1.0.1'
+    implementation 'com.asksira.android:webviewsuite:1.0.2'
 ```
 
 ### Step 2: Add WebViewSuite to XML
@@ -154,6 +154,10 @@ This trick greatly improved user experience.
 Actually, such trick is not only applicable to WebView, but applicable to all View elements that delays Activity creation due to slow inflation.
 
 ## Release Notes
+
+v1.0.2
+- Flattened View Hierarchy
+- Made `toggleProgressBar()` public
 
 v1.0.1  
 - Added support for static HTML data loading

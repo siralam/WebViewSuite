@@ -16,8 +16,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 /**
  * A combination of WebView and Progressbar.
@@ -27,7 +27,7 @@ import android.widget.ProgressBar;
  * https://stackoverflow.com/questions/46928113/inflating-webview-is-slow-since-lollipop/
  */
 
-public class WebViewSuite extends FrameLayout {
+public class WebViewSuite extends RelativeLayout {
 
     private Context context;
 
@@ -185,7 +185,7 @@ public class WebViewSuite extends FrameLayout {
         this.customProgressBar = progressBar;
     }
 
-    private void toggleProgressbar (boolean isVisible) {
+    public void toggleProgressbar (boolean isVisible) {
         int status = isVisible ? View.VISIBLE : View.GONE;
         switch (progressBarStyle) {
             case PROGRESS_BAR_STYLE_CIRCULAR:
