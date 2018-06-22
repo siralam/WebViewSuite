@@ -25,7 +25,7 @@ allprojects {
 And then add the below to your app's build.gradle:  
 
 ```
-    implementation 'com.asksira.android:webviewsuite:1.0.2'
+    implementation 'com.asksira.android:webviewsuite:1.0.3'
 ```
 
 ### Step 2: Add WebViewSuite to XML
@@ -41,6 +41,7 @@ And then add the below to your app's build.gradle:
         app:enableJavaScript="false"
         app:overrideTelLink="true"
         app:overrideEmailLink="true"
+        app:overridePdfLink="true"
         app:showZoomControl="false"
         app:enableVerticalScrollBar="false"
         app:enableHorizontalScrollBar="false"/>
@@ -53,6 +54,7 @@ And then add the below to your app's build.gradle:
 | enableJavaScript           | false        | true / false                  |
 | overrideTelLink            | true         | true / false                  | 
 | overrideEmailLink          | true         | true / false                  | 
+| overridePdfLink            | true         | true / false                  | 
 | showZoomControl            | false        | true / false                  | 
 | enableVerticalScrollBar    | false        | true / false                  | 
 | enableHorizontalScrollBar  | false        | true / false                  | 
@@ -142,6 +144,19 @@ Instead of `startLoading()`, use `startLoadData()` instead:
 webViewSuite.startLoadData(data, mimeType, encoding);
 ```
 
+### Set Action after opening PDF
+
+PDF files are opened using simply an `ACTION_VIEW` intent with the PDF URL.  
+And it depends, sometimes it may be weird if you go back to the WebView after pressing back button while viewing the PDF file (e.g. The PDF file was the first page, thus when you back, you simply see a blank WebView)  
+
+```java
+        webViewSuite.setOpenPDFCallback(new WebViewSuite.WebViewOpenPDFCallback() {
+            @Override
+            public void onOpenPDF() {
+                finish();
+            }
+        });
+```
 
 ## How does it work?
 
@@ -154,6 +169,9 @@ This trick greatly improved user experience.
 Actually, such trick is not only applicable to WebView, but applicable to all View elements that delays Activity creation due to slow inflation.
 
 ## Release Notes
+
+v1.0.3
+- Added ability of opening PDF URLs using `Intent(ACTION_VIEW)`
 
 v1.0.2
 - Flattened View Hierarchy

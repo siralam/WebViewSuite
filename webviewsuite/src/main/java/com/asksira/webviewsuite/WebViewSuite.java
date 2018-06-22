@@ -41,6 +41,7 @@ public class WebViewSuite extends RelativeLayout {
     private boolean enableJavaScript = false;
     private boolean overrideTelLink = true;
     private boolean overrideEmailLink = true;
+    private boolean overridePdfLink = true;
     private boolean showZoomControl = false;
     private boolean enableVerticalScrollBar = false;
     private boolean enableHorizontalScrollBar = false;
@@ -62,6 +63,7 @@ public class WebViewSuite extends RelativeLayout {
 
     private WebViewSuiteCallback callback;
     private WebViewSetupInterference interference;
+    private WebViewOpenPDFCallback openPDFCallback;
 
     public WebViewSuite(@NonNull Context context) {
         super(context);
@@ -77,6 +79,7 @@ public class WebViewSuite extends RelativeLayout {
             enableJavaScript = a.getBoolean(R.styleable.WebViewSuite_enableJavaScript, false);
             overrideTelLink = a.getBoolean(R.styleable.WebViewSuite_overrideTelLink, true);
             overrideEmailLink = a.getBoolean(R.styleable.WebViewSuite_overrideEmailLink, true);
+            overridePdfLink = a.getBoolean(R.styleable.WebViewSuite_overridePdfLink, true);
             showZoomControl = a.getBoolean(R.styleable.WebViewSuite_showZoomControl, false);
             enableVerticalScrollBar = a.getBoolean(R.styleable.WebViewSuite_enableVerticalScrollBar, false);
             enableHorizontalScrollBar = a.getBoolean(R.styleable.WebViewSuite_enableHorizontalScrollBar, false);
@@ -224,6 +227,10 @@ public class WebViewSuite extends RelativeLayout {
         this.interference = interference;
     }
 
+    public void setOpenPDFCallback (WebViewOpenPDFCallback callback) {
+        this.openPDFCallback = callback;
+    }
+
     public WebView getWebView () {
         return this.webView;
     }
@@ -270,6 +277,10 @@ public class WebViewSuite extends RelativeLayout {
                     } catch (Exception e) {
                         return false;
                     }
+                } else if (url.endsWith("pdf") && overridePdfLink) {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    if (openPDFCallback != null) openPDFCallback.onOpenPDF();
+                    return true;
                 } else {
                     if (callback != null) {
                         return callback.shouldOverrideUrlLoading(webView, url);
@@ -304,6 +315,10 @@ public class WebViewSuite extends RelativeLayout {
 
     public interface WebViewSetupInterference {
         void interfereWebViewSetup (WebView webView);
+    }
+
+    public interface WebViewOpenPDFCallback {
+        void onOpenPDF ();
     }
 
 }

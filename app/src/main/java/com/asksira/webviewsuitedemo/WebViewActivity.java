@@ -15,6 +15,12 @@ public class WebViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web_view);
 
         webViewSuite = findViewById(R.id.webViewSuite);
+        webViewSuite.setOpenPDFCallback(new WebViewSuite.WebViewOpenPDFCallback() {
+            @Override
+            public void onOpenPDF() {
+                finish();
+            }
+        });
     }
 
     @Override
