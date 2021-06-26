@@ -12,6 +12,7 @@
         <attr name="overrideTelLink" format="boolean" />
         <attr name="overrideEmailLink" format="boolean" />
         <attr name="overridePdfLink" format="boolean" />
+        <attr name="overrideWhatsAppLink" format="boolean" />
         <attr name="showZoomControl" format="boolean" />
         <attr name="enableVerticalScrollBar" format="boolean"/>
         <attr name="enableHorizontalScrollBar" format="boolean"/>

@@ -42,6 +42,7 @@ public class WebViewSuite extends RelativeLayout {
     private boolean overrideTelLink = true;
     private boolean overrideEmailLink = true;
     private boolean overridePdfLink = true;
+    private boolean overrideWhatsAppLink = true;
     private boolean showZoomControl = false;
     private boolean enableVerticalScrollBar = false;
     private boolean enableHorizontalScrollBar = false;
@@ -80,6 +81,7 @@ public class WebViewSuite extends RelativeLayout {
             overrideTelLink = a.getBoolean(R.styleable.WebViewSuite_overrideTelLink, true);
             overrideEmailLink = a.getBoolean(R.styleable.WebViewSuite_overrideEmailLink, true);
             overridePdfLink = a.getBoolean(R.styleable.WebViewSuite_overridePdfLink, true);
+            overrideWhatsAppLink = a.getBoolean(R.styleable.WebViewSuite_overrideWhatsAppLink, true);
             showZoomControl = a.getBoolean(R.styleable.WebViewSuite_showZoomControl, false);
             enableVerticalScrollBar = a.getBoolean(R.styleable.WebViewSuite_enableVerticalScrollBar, false);
             enableHorizontalScrollBar = a.getBoolean(R.styleable.WebViewSuite_enableHorizontalScrollBar, false);
@@ -273,6 +275,15 @@ public class WebViewSuite extends RelativeLayout {
                         if (emailIntent.resolveActivity(context.getPackageManager()) != null) {
                             context.startActivity(emailIntent);
                         }
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                } else if (url.startsWith("whatsapp") && overrideWhatsAppLink) {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(url));
+                        context.startActivity(intent);
                         return true;
                     } catch (Exception e) {
                         return false;
