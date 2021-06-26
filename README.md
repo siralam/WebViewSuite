@@ -42,6 +42,7 @@ And then add the below to your app's build.gradle:
         app:overrideTelLink="true"
         app:overrideEmailLink="true"
         app:overridePdfLink="true"
+        app:overrideWhatsAppLink="true"
         app:showZoomControl="false"
         app:enableVerticalScrollBar="false"
         app:enableHorizontalScrollBar="false"/>
@@ -55,6 +56,7 @@ And then add the below to your app's build.gradle:
 | overrideTelLink            | true         | true / false                  | 
 | overrideEmailLink          | true         | true / false                  | 
 | overridePdfLink            | true         | true / false                  | 
+| overrideWhatsAppLink       | true         | true / false                  | 
 | showZoomControl            | false        | true / false                  | 
 | enableVerticalScrollBar    | false        | true / false                  | 
 | enableHorizontalScrollBar  | false        | true / false                  | 
