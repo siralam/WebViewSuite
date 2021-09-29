@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewStub;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -248,6 +253,22 @@ public class WebViewSuite extends RelativeLayout {
                 if (callback != null) callback.onPageStarted(view, url, favicon);
             }
 
+            @RequiresApi(api = VERSION_CODES.M)
+            @Override
+            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse)
+            {
+                super.onReceivedHttpError(view, request, errorResponse);
+                if (callback != null) callback.onReceivedHttpError(view, request, errorResponse);
+            }
+
+            @RequiresApi(api = VERSION_CODES.M)
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)
+            {
+                super.onReceivedError(view, request, error);
+                if (callback != null) callback.onReceivedError(view, request, error);
+            }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -310,6 +331,10 @@ public class WebViewSuite extends RelativeLayout {
     public interface WebViewSuiteCallback {
         void onPageStarted(WebView view, String url, Bitmap favicon);
         void onPageFinished(WebView view, String url);
+        @RequiresApi(api = VERSION_CODES.M)
+        void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse);
+        @RequiresApi(api = VERSION_CODES.M)
+        void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error);
         boolean shouldOverrideUrlLoading (WebView view, String url);
     }
 
